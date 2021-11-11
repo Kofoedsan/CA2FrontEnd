@@ -4,6 +4,7 @@ import "./styles/logincss.css";
 import Home from "./component/Home";
 import React, { useState, useEffect } from "react";
 import { LoginUI } from "./component/LogIn";
+import Covid from "./component/Covid";
 
 import {
   BrowserRouter as Router,
@@ -13,12 +14,10 @@ import {
 } from "react-router-dom";
 
 export default function NavBar() {
- 
-
   return (
     <Router>
       <div>
-        <h2 class="customhead">Welcome to Kofoednet.systems</h2>
+        <h2 className="customhead">Welcome to Kofoednet.systems</h2>
         <ul className="header">
           <li>
             <NavLink exact to="/">
@@ -37,7 +36,7 @@ export default function NavBar() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginUI />} />
-            <Route path="/fetchCovid" element={<FetchCovid />} />
+            <Route path="/fetchCovid" element={<Covid />} />
           </Routes>
         </div>
       </div>
@@ -45,41 +44,41 @@ export default function NavBar() {
   );
 }
 
-const FetchCovid = () => {
-  const [covid, setCovid] = useState([]);
-    fetch("https://kofoednet.systems/CA2BackEnd/api/fetch/")
-    .then(HandleHttpErrors)
-    .then((res) => res.json())
-    .then((data) => this.setState({ covid: data }))
-    .catch(ErrorHandling)
-}
+// const FetchCovid = () => {
+//   const [covid, setCovid] = useState([]);
+//     fetch("https://kofoednet.systems/CA2BackEnd/api/fetch/")
+//     .then(HandleHttpErrors)
+//     .then((res) => res.json())
+//     .then((data) => this.setState({ covid: data }))
+//     .catch(ErrorHandling)
+// }
 
-function MakeOptions(method, body) {
-  var opts = {
-    method: method,
-    headers: {
-      "Content-type": "application/json",
-      Accept: "application/json",
-    },
-  };
-  if (body) {
-    opts.body = JSON.stringify(body);
-  }
-  return opts;
-}
+// function MakeOptions(method, body) {
+//   var opts = {
+//     method: method,
+//     headers: {
+//       "Content-type": "application/json",
+//       Accept: "application/json",
+//     },
+//   };
+//   if (body) {
+//     opts.body = JSON.stringify(body);
+//   }
+//   return opts;
+// }
 
-function HandleHttpErrors(res) {
-  if (!res.ok) {
-    return Promise.reject({ status: res.status, fullError: res.json() });
-  }
-  return res.json();
-}
+// function HandleHttpErrors(res) {
+//   if (!res.ok) {
+//     return Promise.reject({ status: res.status, fullError: res.json() });
+//   }
+//   return res.json();
+// }
 
-function ErrorHandling(err) {
-  console.log(err);
-  if (err.status) {
-    err.fullError.then((e) => console.log(e.message));
-  } else {
-    console.log("Network error");
-  }
-}
+// function ErrorHandling(err) {
+//   console.log(err);
+//   if (err.status) {
+//     err.fullError.then((e) => console.log(e.message));
+//   } else {
+//     console.log("Network error");
+//   }
+// }
