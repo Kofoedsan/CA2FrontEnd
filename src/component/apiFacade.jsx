@@ -1,4 +1,4 @@
-import URL from "./component/settings"
+import URL from "./settings"
 
 function handleHttpErrors(res) {
  if (!res.ok) {
@@ -30,10 +30,8 @@ const login = (user, password) => {
     return fetch(URL + "/api/login", options)
       .then(handleHttpErrors)
       .then(res => {setToken(res.token) })
-
-
-
 }
+
 const fetchData = () => {
     const options = makeOptions("GET",true); //True add's the token
     return fetch(URL + "/api/info/user", options).then(handleHttpErrors);

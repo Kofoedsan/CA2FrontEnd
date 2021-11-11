@@ -1,11 +1,10 @@
 import "./styles/style2.css";
 import "./styles/customHead.css";
 import "./styles/logincss.css";
-
+import Home from "./component/Home";
 import React, { useState, useEffect } from "react";
-import facade from "./apiFacade";
-import LoggedIn from "./LoggedIn";
-import LogIn from "./LogIn";
+import { LoginUI } from "./component/LogIn";
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -14,33 +13,31 @@ import {
 } from "react-router-dom";
 
 export default function NavBar() {
+ 
+
   return (
     <Router>
       <div>
         <h2 class="customhead">Welcome to Kofoednet.systems</h2>
-
         <ul className="header">
           <li>
             <NavLink exact to="/">
               Home
             </NavLink>
           </li>
-          <h2 class="logincss">
-            <NavLink
-              to="/Login"
-              style={{ color: "white", textDecoration: "none" }}
-              activeStyle={{ color: "white", textDecoration: "none" }}
-            >
-              Login
-            </NavLink>
-          </h2>
+          <li>
+            <NavLink to="/fetchCovid">Fetch covid info</NavLink>
+          </li>
+          <li>
+            <NavLink to="/Login">Login</NavLink>
+          </li>
         </ul>
         <hr />
-
         <div className="content">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<LoginUI />} />
+            <Route path="/fetchCovid" element={<FetchCovid />} />
           </Routes>
         </div>
       </div>
@@ -48,43 +45,41 @@ export default function NavBar() {
   );
 }
 
-function Home() {
-  return (
-    <div>
-      <h2>Welcome to Kofoednet.systems</h2>
-      <p>On this site you'll find a varation of small tasks and projects.</p>
-      <p>
-        <a href="https://reactrouter.com/web/example/basic">
-          {" "}
-          Made with react router:
-        </a>{" "}
-      </p>
-    </div>
-  );
+const FetchCovid = () => {
+  const [covid, setCovid] = useState([]);
+    fetch("https://kofoednet.systems/CA2BackEnd/api/fetch/")
+    .then(HandleHttpErrors)
+    .then((res) => res.json())
+    .then((data) => this.setState({ covid: data }))
+    .catch(ErrorHandling)
 }
 
-function Login() {
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  const logout = () => {
-    facade.logout();
-    setLoggedIn(false);
+function MakeOptions(method, body) {
+  var opts = {
+    method: method,
+    headers: {
+      "Content-type": "application/json",
+      Accept: "application/json",
+    },
   };
+  if (body) {
+    opts.body = JSON.stringify(body);
+  }
+  return opts;
+}
 
-  const login = (user, pass) => {
-    facade.login(user, pass).then((res) => setLoggedIn(true));
-  };
+function HandleHttpErrors(res) {
+  if (!res.ok) {
+    return Promise.reject({ status: res.status, fullError: res.json() });
+  }
+  return res.json();
+}
 
-  return (
-    <div>
-      {!loggedIn ? (
-        <LogIn login={login} />
-      ) : (
-        <div>
-          <LoggedIn facade={facade} />
-          <button onClick={logout}>Logout</button>
-        </div>
-      )}
-    </div>
-  );
+function ErrorHandling(err) {
+  console.log(err);
+  if (err.status) {
+    err.fullError.then((e) => console.log(e.message));
+  } else {
+    console.log("Network error");
+  }
 }
