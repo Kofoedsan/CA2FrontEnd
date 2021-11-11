@@ -20,9 +20,7 @@ export default function NavBar() {
         <h2 className="customhead">Welcome to Kofoednet.systems</h2>
         <ul className="header">
           <li>
-            <NavLink exact to="/">
-              Home
-            </NavLink>
+            <NavLink to="/">Home</NavLink>
           </li>
           <li>
             <NavLink to="/fetchCovid">Fetch covid info</NavLink>

@@ -5,9 +5,7 @@ function LoggedIn({facade}) {
     
     useEffect(() => {
         facade.fetchData().then(data=> setDataFromServer(data.msg));
-
-
-    }, [])
+    }, [facade])
    
     return (
       <div>
