@@ -1,14 +1,14 @@
 function Home() {
     return (
       <div>
-        <h2>Welcome to Kofoednet.systems</h2>
-        <p>On this site you'll find a varation of small tasks and projects.</p>
-        <p>
-          <a href="https://reactrouter.com/web/example/basic">
-            {" "}
-            Made with react router:
-          </a>{" "}
-        </p>
+        <h2>CA2 FrontEnd</h2>
+     <p>
+Click on "Fetch covid info" to get info about a countrys corona virus details.
+Click on "Fetch Recipes" to get a random recipie.
+
+Click on "Login" to login, as a user or admin.
+
+     </p>
       </div>
     );
   }
