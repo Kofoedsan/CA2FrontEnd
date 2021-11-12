@@ -5,6 +5,7 @@ import Home from "./component/Home";
 import React, { useState, useEffect } from "react";
 import { LoginUI } from "./component/LogIn";
 import Covid from "./component/Covid";
+import Recipes from "./component/Recipes"
 
 import {
   BrowserRouter as Router,
@@ -23,10 +24,13 @@ export default function NavBar() {
             <NavLink to="/">Home</NavLink>
           </li>
           <li>
+            <NavLink to="/Login">Login</NavLink>
+          </li>
+          <li>
             <NavLink to="/fetchCovid">Fetch covid info</NavLink>
           </li>
           <li>
-            <NavLink to="/Login">Login</NavLink>
+            <NavLink to="/fetchRecipes">Fetch Recipes</NavLink>
           </li>
         </ul>
         <hr />
@@ -35,6 +39,7 @@ export default function NavBar() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginUI />} />
             <Route path="/fetchCovid" element={<Covid />} />
+            <Route path="/fetchRecipes" element={<Recipes />} />
           </Routes>
         </div>
       </div>
