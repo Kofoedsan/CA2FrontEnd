@@ -7,6 +7,7 @@ import { LoginUI } from "./component/LogIn";
 import Covid from "./component/Covid";
 import Recipes from "./component/Recipes"
 
+
 import {
   BrowserRouter as Router,
   Routes,
